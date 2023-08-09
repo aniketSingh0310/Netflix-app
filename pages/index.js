@@ -3,19 +3,19 @@ import SectionCards from "@/components/Card/section-card";
 import Navbar from "@/components/Navbar";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { getVideos } from "@/lib/video";
 
-export default function Home() {
-  const disneyVideos = [
-    {
-      imgUrl: "/static/barbie.webp",
-    },
-    {
-      imgUrl: "/static/batman.jpg",
-    },
-    {
-      imgUrl: "/static/Barbie2.webp",
-    },
-  ];
+
+
+export async function getServerSideProps(context) {
+  const disneyVideos = getVideos();
+
+  return {
+    props: { disneyVideos }, // will be passed to the page component as props
+  };
+}
+
+export default function Home({disneyVideos}) {
   return (
     <div>
       <Head>
