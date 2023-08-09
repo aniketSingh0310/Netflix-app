@@ -34,7 +34,7 @@
 }
 
 .series {
-  font-size: 0.875rem /* 14px */;
+  font-size: 16px;
   line-height: 1.25rem /* 20px */;
   color: var(--gray20);
   align-self: center;
