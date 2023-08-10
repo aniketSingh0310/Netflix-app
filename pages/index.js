@@ -7,14 +7,6 @@ import { getVideos,getPopularVideos } from "@/lib/video";
 
 
 
-// export async function getServerSideProps(context) {
-//   const disneyVideos = await getVideos();
-
-//   return {
-//     props: { disneyVideos }, // will be passed to the page component as props
-//   };
-// }
-
 export async function getServerSideProps(context) {
   try {
   const disneyVideos = await getVideos("disney trailer");
@@ -33,6 +25,8 @@ export async function getServerSideProps(context) {
   }
 }
 export default function Home({disneyVideos,marvelVideos,footballVideos,popularVideos}) {
+
+  
   return (
     <div>
       <Head>
@@ -40,7 +34,7 @@ export default function Home({disneyVideos,marvelVideos,footballVideos,popularVi
       </Head>
       <div className={styles.main}>
 
-      <Navbar username="aniket@gmail.com" />
+      <Navbar username="aniketreuls@gmail.com" />
       <Banner
         title="The Batman"
         subTitle="Gotham Series"
