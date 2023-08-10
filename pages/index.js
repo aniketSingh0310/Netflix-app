@@ -34,7 +34,7 @@ export default function Home({disneyVideos,marvelVideos,footballVideos,popularVi
       </Head>
       <div className={styles.main}>
 
-      <Navbar username="aniketreuls@gmail.com" />
+      <Navbar />
       <Banner
         title="The Batman"
         subTitle="Gotham Series"

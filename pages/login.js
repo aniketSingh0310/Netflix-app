@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Login.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { magic } from "../lib/magic-client";
 
@@ -10,8 +10,22 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [userMsg, setUserMsg] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
+
+    useEffect(() => {
+      const handleComplete = () => {
+        setIsLoading(false);
+      };
+      router.events.on("routeChangeComplete", handleComplete);
+      router.events.on("routeChangeError", handleComplete);
+  
+      return () => {
+        router.events.off("routeChangeComplete", handleComplete);
+        router.events.off("routeChangeError", handleComplete);
+      };
+    }, [router]);
     
     const handleOnChangeEmail = (e) => {
       setUserMsg("");
@@ -23,6 +37,7 @@ const Login = () => {
 const handleLogin=async (e)=>{
     console.log("Hi login");
     e.preventDefault();
+    setIsLoading(true);
     if (email) {
         if (email === "aniketreuls@gmail.com") {
             try {
@@ -31,20 +46,24 @@ const handleLogin=async (e)=>{
                 });
                 console.log({ didToken });
                 if (didToken) {
+                  
                     router.push("/");
                   }
               } catch (error) {
                 // Handle errors if required!
                 console.error("Something went wrong logging in", error);
+                setIsLoading(false);
               }
             // router.push("/");
           } else {
             
             setUserMsg("Something went wrong logging in");
+            setIsLoading(false);
           }
       } else {
         // show user message
         setUserMsg("Enter a valid email address");
+        setIsLoading(false);
       }
 }
 
@@ -80,7 +99,7 @@ const handleLogin=async (e)=>{
             onChange={handleOnChangeEmail}
             />
             <p className="text-sm text-red-500 font-light">{userMsg}</p>
-            <button onClick={handleLogin} className="px-12 py-2 rounded-md bg-red-500 text-base flex items-center justify-center">Sign in</button>
+            <button onClick={handleLogin} className="px-12 py-2 rounded-md bg-red-500 text-base flex items-center justify-center">{isLoading ? "Loading..." : "Sign In"}</button>
         </div>
             </div>
       </div>
