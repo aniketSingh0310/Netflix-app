@@ -39,6 +39,7 @@ export default function Home({disneyVideos,marvelVideos,footballVideos,popularVi
         title="The Batman"
         subTitle="Gotham Series"
         imgUrl="/static/batman.jpg"
+        videoId="ctlz0R1tSZE"
         />
       <div className={styles.sectionWrapper}>
         <SectionCards title="Disney" videos={disneyVideos} size="large" />
