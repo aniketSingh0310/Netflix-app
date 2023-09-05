@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { getVideos,getPopularVideos } from "@/lib/video";
+import { startFetchMyQuery } from "../lib/db/hasura";
+import { Magic } from "magic-sdk";
 
 
 
@@ -26,7 +28,7 @@ export async function getServerSideProps(context) {
 }
 export default function Home({disneyVideos,marvelVideos,footballVideos,popularVideos}) {
 
-  
+  startFetchMyQuery();
   return (
     <div>
       <Head>
